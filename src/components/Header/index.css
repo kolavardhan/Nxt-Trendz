@@ -1,0 +1,48 @@
+.header-bg {
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: Roboto;
+}
+
+.header-content {
+    height: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.website-logo {
+    height: 40px;
+}
+
+.routes-logout-container {
+    height: 80%;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.route-text {
+    color: #64748b;
+    font-size: 18px;
+}
+
+.logout-btn {
+    color: #ffffff;
+    border: none;
+    background-color: #0b69ff;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-weight: 600;
+}

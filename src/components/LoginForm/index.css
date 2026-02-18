@@ -1,0 +1,84 @@
+.loginForm-bg {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-family: roboto;
+}
+
+.webiste-login-img {
+    height: 350px;
+}
+
+.loginForm-card {
+    height: 480px;
+    width: 400px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 3px 3px 5px 5px #d7dfe9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-website-logo {
+    height: 50px;
+    margin-bottom: 40px;
+}
+
+.form-container {
+    height: 280px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input-container {
+    height: 90px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label {
+    color: #64748b;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-box {
+    height: 40px;
+    padding-left: 15px;
+    background-color: #d7dfe9;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    outline: none;
+}
+
+.loginBtn-errorMsg-box {
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+}
+
+.login-btn {
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    background-color: #0b69ff;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.error-msg {
+    color: #ff0b37;
+    font-size: 12px;
+    margin: 0;
+}
