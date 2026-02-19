@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import {Navigate} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import './index.css'
+import './index.css' 
 
 class LoginForm extends Component {
     state = {
@@ -15,12 +15,10 @@ class LoginForm extends Component {
 
     onSubmitSuccess = jwtToken => {
         Cookies.set('jwt_token', jwtToken, {expires: 1, path: '/'})
-        const {history} = this.props
-        history.replace('/')
     }
 
     onSubmitFailure = errorMsg => {
-        this.setState({showSubmitError: true, errorMsg})
+        this.setState({showSubmitError: true, errorMsg}) 
     }
 
     onSubmitLoginApi = async event => {
