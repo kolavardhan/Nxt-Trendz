@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './index.css'
 
 const Home = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
     const onClickShopNow = () => {
         navigate('/products')
     }
