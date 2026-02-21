@@ -43,7 +43,7 @@ class PrimeDealsSection extends Component {
         availability: eachItem.availability,
         brand: eachItem.brand,
         description: eachItem.description,
-        image_url: eachItem.image_url,
+        imageUrl: eachItem.image_url,
         price: eachItem.price,
         rating: eachItem.rating,
         style: eachItem.style,

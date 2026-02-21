@@ -1,0 +1,118 @@
+.allProducts-bg {
+    height: 500px;
+    width: 75%;
+    font-family: roboto;
+}
+
+.allProductsHeader {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aph-heading {
+    margin: 0;
+    font-size: 30px;
+    color: #0f172a;
+}
+
+.sortBy-box {
+    height: 40px;
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: #475569;
+}
+
+.sortByOption-container {
+    font-weight: 600;
+    font-size: 16px;
+    background: none;
+    border: none;
+    color: #475569;
+    outline: none;
+    cursor: pointer;
+}
+
+.sortByOption-label {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.allProductsRender-container {
+    min-height: 500px;
+    max-height: auto;
+    width: 100%;
+}
+
+.products-list-container {
+    list-style-type: none;
+    padding-left: 0;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.allProductsfailure-bg {
+    height: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.productsFailure-img {
+    height: 250px;
+}
+
+.apf-heading {
+    color: #0f172a;
+    font-size: 25px;
+}
+
+.apf-text {
+    color: #475569;
+    text-align: center;
+    font-size: 18px;
+}
+
+.allProducts-loader-container {
+    height: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.noProductsFound-bg {
+    height: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.noProducts-img {
+    height: 250px;
+}
+
+.npf-heading {
+    color: #0f172a;
+    font-size: 25px;
+}
+
+.npf-text {
+    color: #475569;
+    font-size: 18px;
+}
+

@@ -1,0 +1,15 @@
+.allProductsSection-bg {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.filtersGroup-allProducts-container {
+    height: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+}
+
