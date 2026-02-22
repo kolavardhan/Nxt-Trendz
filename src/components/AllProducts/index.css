@@ -116,3 +116,7 @@
     font-size: 18px;
 }
 
+.productCard-link {
+    text-decoration: none;
+    cursor: pointer;
+}

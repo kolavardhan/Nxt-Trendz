@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Home from './components/Home'
 import Products from './components/Products'
 import Cart from './components/Cart'
+import ProductItemDetailsWrapper from './components/ProductItemDetails/ProductItemDetailsWrapper'
 import NotFound from './components/NotFound'
 
 function App() {
@@ -35,6 +36,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Cart />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="/products/:id" 
+          element={
+            <ProtectedRoute>
+              <ProductItemDetailsWrapper/>
             </ProtectedRoute>
           }
         />

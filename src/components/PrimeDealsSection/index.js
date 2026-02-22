@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import { ThreeDots } from 'react-loader-spinner'
 import ProductCard from '../ProductCard'
 import Cookies from 'js-cookie'
@@ -77,10 +78,12 @@ class PrimeDealsSection extends Component {
         <h1 className="pdssc-title">Exclusive Prime Deals</h1>
         <ul className="pd-continer">
           {primeDeals.map(eachItem => (
-            <ProductCard
-              key={eachItem.id}
-              productCardDetails={eachItem}
-            />
+            <Link className="productCard-link" to={`/products/${eachItem.id}`}>
+              <ProductCard
+                key={eachItem.id}
+                productCardDetails={eachItem}
+              />
+            </Link>
           ))}
         </ul>
       </div>

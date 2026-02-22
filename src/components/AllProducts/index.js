@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import { BsFilterRight } from 'react-icons/bs'
 import { ThreeDots } from 'react-loader-spinner'
 import Cookies from 'js-cookie'
@@ -103,10 +104,12 @@ class AllProducts extends Component {
     return (
       <ul className="products-list-container">
         {productsList.map(eachItem => (
-          <ProductCard
-            key={eachItem.id}
-            productCardDetails={eachItem}
-          />
+          <Link className="productCard-link" to={`/products/${eachItem.id}`}>
+            <ProductCard
+              key={eachItem.id}
+              productCardDetails={eachItem}
+            />
+          </Link>
         ))}
       </ul>
     )
