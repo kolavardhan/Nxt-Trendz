@@ -18,7 +18,9 @@ const apiStatusConstants = {
 class ProductItemDetails extends Component {
     state = {
         apiStatus: apiStatusConstants.initial,
-        productItemDetails: {}
+        productData: {},
+        similarProductsData: [],
+        quantity: 1
     }
 
     componentDidMount() {
@@ -26,13 +28,13 @@ class ProductItemDetails extends Component {
     }
 
     componentDidUpdate(prevProps) {
-    const prevId = prevProps.params.id
-    const currentId = this.props.params.id
+        const prevId = prevProps.params.id
+        const currentId = this.props.params.id
 
-    if (prevId !== currentId) {
-      this.productDetailsApi()
+        if (prevId !== currentId) {
+        this.productDetailsApi()
+        }
     }
-  }
 
     productDetailsApi = async () => {
         this.setState({apiStatus: apiStatusConstants.inProgress})
@@ -50,7 +52,7 @@ class ProductItemDetails extends Component {
         const response = await fetch(productDetailsApiUrl, options)
         if (response.ok === true) {
             const data = await response.json()
-            const formattedData = {
+            const formattedProductData = {
                 availability: data.availability,
                 brand: data.brand,
                 description: data.description,
@@ -61,30 +63,42 @@ class ProductItemDetails extends Component {
                 style: data.style,
                 title: data.title,
                 totalReviews: data.total_reviews,
-                similarProducts: data.similar_products.map((eachItem) => ({
-                    availability: eachItem.availability,
-                    brand: eachItem.brand,
-                    description: eachItem.description,
-                    id: eachItem.id,
-                    imageUrl: eachItem.image_url,
-                    price: eachItem.price,
-                    rating: eachItem.rating,
-                    style: eachItem.style,
-                    title: eachItem.title,
-                    totalReviews: eachItem.total_reviews,
-                }))
             }
-            console.log(formattedData)
-            this.setState({apiStatus: apiStatusConstants.failure, productItemDetails: formattedData})
+            const formattedSimilarProductsData = data.similar_products.map((eachItem) => ({
+                availability: eachItem.availability,
+                brand: eachItem.brand,
+                description: eachItem.description,
+                id: eachItem.id,
+                imageUrl: eachItem.image_url,
+                price: eachItem.price,
+                rating: eachItem.rating,
+                style: eachItem.style,
+                title: eachItem.title,
+                totalReviews: eachItem.total_reviews,
+            }))
+            
+            this.setState({apiStatus: apiStatusConstants.success, productData: formattedProductData, similarProductsData: formattedSimilarProductsData})
         }
         else if (response.status === 401) {
             this.setState({apiStatus: apiStatusConstants.failure})
         }
     }
 
+    incrementQuantity = () => {
+        this.setState((prevState) => ({
+            quantity: prevState.quantity + 1
+        })) 
+    }
+
+    decrementQuantity = () => {
+        this.setState((prevState) => ({
+            quantity: prevState.quantity > 1? prevState.quantity - 1: prevState.quantity
+        }))
+    }
+
     renderSuccessView = () => {
-        const {productItemDetails} = this.state
-        const {imageUrl, title, price, rating, totalReviews, description, availability, brand, similarProducts} = productItemDetails
+        const {productData, similarProductsData, quantity} = this.state
+        const {imageUrl, title, price, rating, totalReviews, description, availability, brand} = productData
         return (
             <div className='productItemDetails-bg'>
             <div className='pid-top-section'>
@@ -105,11 +119,11 @@ class ProductItemDetails extends Component {
                         <p className='pdc-brand'><span className='pdc-span'>Brand:</span> {brand}</p>
                     </div>
                     <div className='pdc-changeQuantity'>
-                        <button type='button' className='changeQuantiy-btn'>
+                        <button type='button' className='changeQuantiy-btn' onClick={this.incrementQuantity}>
                             <CiSquarePlus color='#475569' size={18} className='icon'/>
                         </button>
-                        <p className='pdc-quantity'>1</p>
-                        <button type='button' className='changeQuantiy-btn'>
+                        <p className='pdc-quantity'>{quantity}</p>
+                        <button type='button' className='changeQuantiy-btn' onClick={this.decrementQuantity}>
                             <CiSquareMinus color='#475569' size={18} className='icon'/>
                         </button>
                     </div>
@@ -119,10 +133,12 @@ class ProductItemDetails extends Component {
             <div className='pid-similarProducts'>
                 <h2 className='sp-title'>Similar Products</h2>
                 <ul className='similarProducts-list'>
-                    {similarProducts && similarProducts.map((eachItem) =>
-                    <Link className='similarProducts-link' to={`/products/${eachItem.id}`}> 
+                    {similarProductsData && similarProductsData.map((eachItem) =>
+                    <li key={eachItem.id}>
+                        <Link className='similarProducts-link' to={`/products/${eachItem.id}`}> 
                         <ProductCard key={eachItem.id} productCardDetails={eachItem}/>
                     </Link>
+                    </li>
                     )}
                 </ul>
             </div>
