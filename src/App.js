@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import CartContext from './context/CartContext'
-import LoginForm from './components/LoginForm'
+import LoginFormWrapper from './components/LoginForm/LoginFormWrapper'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './components/Home'
 import Products from './components/Products'
@@ -14,19 +14,19 @@ class App extends Component {
     cartList: [] 
   }
 
-  componentDidMount() {
-    const storedCartList = localStorage.getItem('cartList')
+  // componentDidMount() {
+  //   const storedCartList = localStorage.getItem('cartList')
 
-    if (storedCartList) {
-      this.setState({cartList: JSON.parse(storedCartList)})
-    }
-  }
+  //   if (storedCartList) {
+  //     this.setState({cartList: JSON.parse(storedCartList)})
+  //   }
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.cartList !== this.state.cartList) {
-      localStorage.setItem('cartList', JSON.stringify(this.state.cartList))
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.cartList !== this.state.cartList) {
+  //     localStorage.setItem('cartList', JSON.stringify(this.state.cartList))
+  //   }
+  // }
 
   addCartItem = (product) => {
     this.setState((prevState) => {
@@ -95,7 +95,7 @@ class App extends Component {
       }>
             <BrowserRouter>
               <Routes>
-                <Route path="/login" element={<LoginForm />} />
+                <Route path="/login" element={<LoginFormWrapper />} />
 
                 <Route
                   path="/"

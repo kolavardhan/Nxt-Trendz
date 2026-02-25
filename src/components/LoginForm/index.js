@@ -14,7 +14,9 @@ class LoginForm extends Component {
     }
 
     onSubmitSuccess = jwtToken => {
+        const {navigate} = this.props
         Cookies.set('jwt_token', jwtToken, {expires: 1, path: '/'})
+        navigate('/')
     }
 
     onSubmitFailure = errorMsg => {
@@ -24,21 +26,21 @@ class LoginForm extends Component {
     onSubmitLoginApi = async event => {
         event.preventDefault()
         const {username, password} = this.state
-        if (username.trim() !== '' || password.trim() !== '') {
+
+        if (username.trim() !== '' && password.trim() !== '') {
             const userDetails = {username, password}
             const options = {
-                method: 'POST',
-                body: JSON.stringify(userDetails)
+            method: 'POST',
+            body: JSON.stringify(userDetails),
             }
-            const loginUrl = "https://apis.ccbp.in/login"
-            const response = await fetch(loginUrl, options)
+
+            const response = await fetch('https://apis.ccbp.in/login', options)
             const data = await response.json()
 
-            if (response.ok === true) {
-                this.onSubmitSuccess(data.jwt_token)
-            }
-            else {
-                this.onSubmitFailure(data.error_msg)
+            if (response.ok) {
+            this.onSubmitSuccess(data.jwt_token)
+            } else {
+            this.onSubmitFailure(data.error_msg)
             }
         }
     }
@@ -67,10 +69,6 @@ class LoginForm extends Component {
 
     render() {
         const {username, password, showSubmitError, errorMsg, usernameError, passwordError} = this.state
-        const jwtToken = Cookies.get("jwt_token")
-        if (jwtToken !== undefined) {
-            return <Navigate to="/" />
-        }
         return <div className="loginForm-bg">
             <img src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-login-img.png" alt="website login" className='webiste-login-img'/>
             <div className='loginForm-card'>
