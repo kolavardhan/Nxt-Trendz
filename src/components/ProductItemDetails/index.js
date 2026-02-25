@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import CartContext from '../../context/CartContext';
 import { Link } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner'
 import { FaStar } from "react-icons/fa";
@@ -100,49 +101,59 @@ class ProductItemDetails extends Component {
         const {productData, similarProductsData, quantity} = this.state
         const {imageUrl, title, price, rating, totalReviews, description, availability, brand} = productData
         return (
-            <div className='productItemDetails-bg'>
-            <div className='pid-top-section'>
-                <img src={imageUrl} alt={title} className='pidts-img'/>
-                <div className='productDetails-container'>
-                    <div className='pdc-section1'>
-                        <h2 className='pdc-title'>{title}</h2>
-                        <p className='pdc-price'>{`Rs ${price}/-`}</p>
-                        <div className='pdc-rating-review-container'>
-                            <div className='pdc-rating-container'>
-                                <p className='pdc-rating'>{rating}</p>
-                                <FaStar color='#ffffff' size={16}/>
+            <CartContext.Consumer>
+                {value => {
+                    const {addCartItem} = value
+                    const onClickAddItem = () => {
+                        addCartItem({...productData, quantity})
+                    }
+                    return (
+                        <div className='productItemDetails-bg'>
+                        <div className='pid-top-section'>
+                            <img src={imageUrl} alt={title} className='pidts-img'/>
+                            <div className='productDetails-container'>
+                                <div className='pdc-section1'>
+                                    <h2 className='pdc-title'>{title}</h2>
+                                    <p className='pdc-price'>{`Rs ${price}/-`}</p>
+                                    <div className='pdc-rating-review-container'>
+                                        <div className='pdc-rating-container'>
+                                            <p className='pdc-rating'>{rating}</p>
+                                            <FaStar color='#ffffff' size={16}/>
+                                        </div>
+                                        <p className='pdc-review'>{`${totalReviews} Reviews`}</p>
+                                    </div>
+                                    <p className='pdc-description'>{description}</p>
+                                    <p className='pdc-availability'><span className='pdc-span'>Availability:</span> {availability}</p>
+                                    <p className='pdc-brand'><span className='pdc-span'>Brand:</span> {brand}</p>
+                                </div>
+                                <div className='pdc-changeQuantity'>
+                                    <button type='button' className='changeQuantiy-btn' onClick={this.incrementQuantity}>
+                                        <CiSquarePlus color='#475569' size={18} className='icon'/>
+                                    </button>
+                                    <p className='pdc-quantity'>{quantity}</p>
+                                    <button type='button' className='changeQuantiy-btn' onClick={this.decrementQuantity}>
+                                        <CiSquareMinus color='#475569' size={18} className='icon'/>
+                                    </button>
+                                </div>
+                                <button type='button' className='addToCart-btn' onClick={onClickAddItem}>ADD TO CART</button>
                             </div>
-                            <p className='pdc-review'>{`${totalReviews} Reviews`}</p>
                         </div>
-                        <p className='pdc-description'>{description}</p>
-                        <p className='pdc-availability'><span className='pdc-span'>Availability:</span> {availability}</p>
-                        <p className='pdc-brand'><span className='pdc-span'>Brand:</span> {brand}</p>
+                        <div className='pid-similarProducts'>
+                            <h2 className='sp-title'>Similar Products</h2>
+                            <ul className='similarProducts-list'>
+                                {similarProductsData && similarProductsData.map((eachItem) =>
+                                <li key={eachItem.id}>
+                                    <Link className='similarProducts-link' to={`/products/${eachItem.id}`}> 
+                                    <ProductCard key={eachItem.id} productCardDetails={eachItem}/>
+                                </Link>
+                                </li>
+                                )}
+                            </ul>
+                        </div>
                     </div>
-                    <div className='pdc-changeQuantity'>
-                        <button type='button' className='changeQuantiy-btn' onClick={this.incrementQuantity}>
-                            <CiSquarePlus color='#475569' size={18} className='icon'/>
-                        </button>
-                        <p className='pdc-quantity'>{quantity}</p>
-                        <button type='button' className='changeQuantiy-btn' onClick={this.decrementQuantity}>
-                            <CiSquareMinus color='#475569' size={18} className='icon'/>
-                        </button>
-                    </div>
-                    <button type='button' className='addToCart-btn'>ADD TO CART</button>
-                </div>
-            </div>
-            <div className='pid-similarProducts'>
-                <h2 className='sp-title'>Similar Products</h2>
-                <ul className='similarProducts-list'>
-                    {similarProductsData && similarProductsData.map((eachItem) =>
-                    <li key={eachItem.id}>
-                        <Link className='similarProducts-link' to={`/products/${eachItem.id}`}> 
-                        <ProductCard key={eachItem.id} productCardDetails={eachItem}/>
-                    </Link>
-                    </li>
-                    )}
-                </ul>
-            </div>
-        </div>
+                    )
+                }}
+            </CartContext.Consumer>
         )
     }
 
