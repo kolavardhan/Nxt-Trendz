@@ -144,9 +144,9 @@ class ProductItemDetails extends Component {
                                 {similarProductsData && similarProductsData.map((eachItem) =>
                                 <li key={eachItem.id}>
                                     <Link className='similarProducts-link' to={`/products/${eachItem.id}`}> 
-                                    <ProductCard key={eachItem.id} productCardDetails={eachItem}/>
-                                </Link>
-                                </li>
+                                        <ProductCard key={eachItem.id} productCardDetails={eachItem}/>
+                                    </Link>
+                                </li> 
                                 )}
                             </ul>
                         </div>

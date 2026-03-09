@@ -1,5 +1,4 @@
 import { Component } from 'react'
-import {Navigate} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import './index.css' 
 
